@@ -1,0 +1,34 @@
+{
+  "name": "ahp/minio-filesystem",
+  "description": "PHP Flysystem implementation for MinIO",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Ahp\\Filesystem\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    },
+    "files": [
+      "tests/Helper.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Amirhossein Pooladvand",
+      "email": "a.h.pooladvand@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "league/flysystem": "^3.0",
+    "aws/aws-sdk-php": "^3.209"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "symfony/var-dumper": "^6.0"
+  }
+}
