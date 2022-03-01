@@ -11,6 +11,14 @@ abstract class AbstractFilesystem
 {
     use ParameterTrait;
 
+    /**
+     * Reads the object.
+     *
+     * @param  string  $location
+     *
+     * @return \Aws\Result
+     * @throws \League\Flysystem\FilesystemException
+     */
     protected function readObject(string $location): Result
     {
         if (! $this->fileExists($location)) {
@@ -22,6 +30,13 @@ abstract class AbstractFilesystem
         return $this->client->getObject($this->getParams());
     }
 
+    /**
+     * Creates Attribute class file from array.
+     *
+     * @param  array  $item
+     *
+     * @return \League\Flysystem\FileAttributes
+     */
     protected function toFileAttribute(array $item): FileAttributes
     {
         return new FileAttributes(

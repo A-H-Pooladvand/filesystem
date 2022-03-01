@@ -2,81 +2,59 @@
 
 namespace Tests;
 
-use Aws\S3\S3Client;
 use Ahp\Filesystem\Filesystem;
-use Aws\Credentials\Credentials;
+use Tests\lib\Traits\RefreshMinioDatabase;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
+    use RefreshMinioDatabase;
+
     public Filesystem $client;
 
-    private S3Client $s3Client;
+    public string $bucket;
 
-    public string $bucket = 'sample';
     public string $validFile = 'animals/cat.jpg';
+
     public string $invalidFile = 'animals/dog.jpg';
 
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    /**
+     * This method is called before each test.
+     *
+     * @return void
+     */
+    protected function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
-        $this->s3Client = $this->client();
+        $this->bucket = $_ENV['MINIO_BUCKET'];
+
         $this->client = $this->filesystem();
     }
 
-    protected function setUp(): void
-    {
-        if (! $this->s3Client->doesBucketExist($this->bucket)) {
-            $this->createSamples();
-        }
-    }
-
+    /**
+     * New Filesystem client.
+     *
+     * @return \Ahp\Filesystem\Filesystem
+     */
     public function filesystem(): Filesystem
     {
-        return new Filesystem($this->client(), $this->bucket);
+        return new Filesystem(
+            $this->s3Client(),
+            $this->bucket
+        );
     }
 
-    public function client(): S3Client
+    /**
+     * Creates a sample image file.
+     *
+     * @return void
+     */
+    private function createSampleFile()
     {
-        return new S3Client([
-            'version'                 => $config['version'] ?? 'latest',
-            'region'                  => $config['region'] ?? 'me-south-1',
-            'bucket_endpoint'         => false,
-            'use_path_style_endpoint' => true,
-            'endpoint'                => '192.168.1.196:9000',
-            'credentials'             => new Credentials(
-                'minioadmin',
-                'minioadmin'
-            ),
-        ]);
-    }
-
-    private function createSamples()
-    {
-        $this->s3Client->createBucket(['Bucket' => $this->bucket]);
-
-        $content = file_get_contents(__DIR__ . '/Files/cat.jpg');
+        $content = file_get_contents(__DIR__ . 'lib/Files/cat.jpg');
 
         $this->s3Client->upload(
             $this->bucket,
             'animals/cat.jpg',
             $content
         );
-    }
-
-    private function truncateSample()
-    {
-        $this->s3Client->deleteObject([
-            'Bucket' => $this->bucket,
-            'Key'    => 'animals/cat.jpg',
-        ]);
-
-        $this->s3Client->deleteBucket([
-            'Bucket' => $this->bucket,
-        ]);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->truncateSample();
     }
 }
