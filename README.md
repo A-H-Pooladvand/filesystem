@@ -19,7 +19,7 @@ You can add this library as a local, per-project dependency to your project usin
 
 ```
 
-composer require ahp/filesystem
+composer require ahp/minio-filesystem
 
 ```
 
@@ -29,6 +29,6 @@ If you only need this library during development, for instance to run your proje
 
 ```
 
-composer require --dev ahp/filesystem
+composer require --dev ahp/minio-filesystem
 
 ```
