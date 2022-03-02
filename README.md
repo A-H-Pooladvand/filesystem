@@ -4,11 +4,11 @@
 
 PHP League\Flysystem implementation for MinIO
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/sebastian/lines-of-code.svg?style=flat-square)](https://packagist.org/packages/sebastian/lines-of-code)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
-[![CI Status](https://github.com/sebastianbergmann/lines-of-code/workflows/CI/badge.svg?branch=master&event=push)](https://phpunit.de/build-status.html)
-[![Type Coverage](https://shepherd.dev/github/sebastianbergmann/lines-of-code/coverage.svg)](https://shepherd.dev/github/sebastianbergmann/lines-of-code)
-
+[![Latest Stable Version](http://poser.pugx.org/ahp/minio-filesystem/v)](https://packagist.org/packages/ahp/minio-filesystem)
+[![Total Downloads](http://poser.pugx.org/ahp/minio-filesystem/downloads)](https://packagist.org/packages/ahp/minio-filesystem) 
+[![Latest Unstable Version](http://poser.pugx.org/ahp/minio-filesystem/v/unstable)](https://packagist.org/packages/ahp/minio-filesystem) 
+[![License](http://poser.pugx.org/ahp/minio-filesystem/license)](https://packagist.org/packages/ahp/minio-filesystem) 
+[![PHP Version Require](http://poser.pugx.org/ahp/minio-filesystem/require/php)](https://packagist.org/packages/ahp/minio-filesystem)
 
 
 [//]: # (## Installation)
