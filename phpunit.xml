@@ -23,7 +23,7 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="MINIO_VERSION" value="latest"/>
         <env name="MINIO_REGION" value="me-south-1"/>
-        <env name="MINIO_ENDPOINT" value="192.168.1.196:9000"/>
+        <env name="MINIO_ENDPOINT" value="127.0.0.1:9000"/>
         <env name="MINIO_BUCKET" value="test"/>
         <env name="MINIO_KEY" value="minioadmin"/>
         <env name="MINIO_SECRET" value="minioadmin"/>

@@ -17,6 +17,10 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
     public string $invalidFile = 'animals/dog.jpg';
 
+    public string $validDirectory = 'animals';
+
+    public string $invalidDirectory = 'shops';
+
     /**
      * This method is called before each test.
      *
@@ -25,7 +29,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $this->bucket = $_ENV['MINIO_BUCKET'];
-
         $this->client = $this->filesystem();
     }
 
@@ -47,9 +50,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    private function createSampleFile()
+    public function createSampleFile()
     {
-        $content = file_get_contents(__DIR__ . 'lib/Files/cat.jpg');
+        $content = file_get_contents(__DIR__ . '/lib/Files/cat.jpg');
 
         $this->s3Client->upload(
             $this->bucket,

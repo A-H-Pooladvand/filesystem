@@ -2,6 +2,7 @@
 
 namespace Tests\lib\Traits;
 
+use Throwable;
 use Aws\S3\S3Client;
 use RuntimeException;
 use Aws\Credentials\Credentials;
@@ -12,8 +13,10 @@ trait RefreshMinioDatabase
 
     private string $b;
 
-    public function __construct()
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
+        parent::__construct($name, $data, $dataName);
+
         $this->s3Client = $this->s3Client();
         $this->b = $_ENV['MINIO_BUCKET'];
     }
@@ -51,18 +54,7 @@ trait RefreshMinioDatabase
             throw new RuntimeException("You are not in the testing environment you are in $env environment. if you are in testing environment please first check the phpunit environment variables then change APP_ENV to testing.");
         }
 
-        // Get all the objects inside the testing bucket.
-        // Delete any item inside the testing bucket.
-
-        $objects = $this->s3Client->listObjectsV2([
-            'Bucket' => $this->b,
-        ]);
-
-        foreach ($objects as $object) {
-            $this->s3Client->deleteObject([
-                'Bucket' => $this->b,
-            ]);
-        }
+        $this->s3Client->deleteMatchingObjects($this->b, '', '/.*/');
     }
 
     /**
@@ -73,5 +65,16 @@ trait RefreshMinioDatabase
     public function tearDown(): void
     {
         $this->truncate();
+    }
+
+    /**
+     * This method is called when a test method did not execute successfully.
+     *
+     * @throws Throwable
+     */
+    public function onNotSuccessfulTest(Throwable $t): void
+    {
+        $this->truncate();
+        parent::onNotSuccessfulTest($t);
     }
 }

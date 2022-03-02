@@ -73,7 +73,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
 
             $result = $this->client->listObjectsV2($this->getParams());
 
-            return isset($result['Contents']) && count($result['Contents']) === 1;
+            return $result->hasKey('Contents');
         } catch (Throwable $exception) {
             throw UnableToCheckExistence::forLocation($location, $exception);
         }
