@@ -6,7 +6,9 @@ use Tests\TestCase;
 
 class DirectoryExistsTest extends TestCase
 {
-    /** @test
+    /**
+     * @test
+     *
      * @throws \League\Flysystem\FilesystemException
      */
     public function it_should_return_true_if_a_directory_exists()
@@ -18,7 +20,9 @@ class DirectoryExistsTest extends TestCase
         );
     }
 
-    /** @test
+    /**
+     * @test
+     *
      * @throws \League\Flysystem\FilesystemException
      */
     public function it_should_return_false_if_a_directory_does_not_exists()
@@ -30,7 +34,9 @@ class DirectoryExistsTest extends TestCase
         );
     }
 
-    /** @test
+    /**
+     * @test
+     *
      * @throws \League\Flysystem\FilesystemException
      */
     public function it_should_return_false_if_it_is_file()

@@ -2,10 +2,10 @@
 
 namespace Ahp\Filesystem;
 
+use Ahp\Filesystem\Traits\ParameterTrait;
 use Aws\Result;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\UnableToReadFile;
-use Ahp\Filesystem\Traits\ParameterTrait;
 
 abstract class AbstractFilesystem
 {
@@ -14,14 +14,15 @@ abstract class AbstractFilesystem
     /**
      * Reads the object.
      *
-     * @param  string  $location
+     * @param string $location
+     *
+     * @throws \League\Flysystem\FilesystemException
      *
      * @return \Aws\Result
-     * @throws \League\Flysystem\FilesystemException
      */
     protected function readObject(string $location): Result
     {
-        if (! $this->fileExists($location)) {
+        if (!$this->fileExists($location)) {
             throw new UnableToReadFile("{$this->bucket}/$location does not exists.");
         }
 
@@ -33,7 +34,7 @@ abstract class AbstractFilesystem
     /**
      * Creates Attribute class file from array.
      *
-     * @param  array  $item
+     * @param array $item
      *
      * @return \League\Flysystem\FileAttributes
      */
@@ -51,7 +52,7 @@ abstract class AbstractFilesystem
     /**
      * Convert the object to its JSON representation.
      *
-     * @param  mixed  $data
+     * @param mixed $data
      *
      * @return string
      */
