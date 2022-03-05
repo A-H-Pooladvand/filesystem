@@ -2,10 +2,10 @@
 
 namespace Tests\lib\Traits;
 
-use Throwable;
+use Aws\Credentials\Credentials;
 use Aws\S3\S3Client;
 use RuntimeException;
-use Aws\Credentials\Credentials;
+use Throwable;
 
 trait RefreshMinioDatabase
 {

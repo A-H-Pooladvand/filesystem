@@ -52,7 +52,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     public function createSampleFile()
     {
-        $content = file_get_contents(__DIR__ . '/lib/Files/cat.jpg');
+        $content = file_get_contents(__DIR__.'/lib/Files/cat.jpg');
 
         $this->s3Client->upload(
             $this->bucket,
