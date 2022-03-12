@@ -63,7 +63,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     public function directoryExists(string $location): bool
     {
         try {
-            $location = rtrim($location, '/').'/';
+            $location = rtrim($location, '/') . '/';
 
             $this->setMaxKeys(1);
             $this->setPrefix($location);
@@ -261,7 +261,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
                 throw UnableToWriteFile::atLocation($location, 'The contents must be a valid file location.');
             }
 
-            $location = $location.'/'.basename($contents);
+            $location = $location . '/' . basename($contents);
             $contents = file_get_contents($contents);
         } else {
             $info = pathinfo($location);
