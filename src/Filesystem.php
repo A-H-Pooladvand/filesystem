@@ -36,12 +36,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Determines if a file exists.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return bool
      *
      * @throws UnableToCheckExistence
      * @throws FilesystemException
-     *
-     * @return bool
      */
     public function fileExists(string $location): bool
     {
@@ -55,12 +54,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Determines if a directory exists.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return bool
      *
      * @throws FilesystemException
      * @throws UnableToCheckExistence
-     *
-     * @return bool
      */
     public function directoryExists(string $location): bool
     {
@@ -81,12 +79,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Determines if a file or directory exists.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return bool
      *
      * @throws FilesystemException
      * @throws UnableToCheckExistence
-     *
-     * @return bool
      */
     public function has(string $location): bool
     {
@@ -100,12 +97,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Get the contents of a file.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return string
      *
      * @throws UnableToReadFile
      * @throws FilesystemException
-     *
-     * @return string
      */
     public function read(string $location): string
     {
@@ -117,12 +113,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Get a resource to read the file.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return resource
      *
      * @throws UnableToReadFile
      * @throws FilesystemException
-     *
-     * @return resource
      */
     public function readStream(string $location)
     {
@@ -132,12 +127,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Get an all files in a directory.
      *
-     * @param string $location
-     * @param bool   $deep
+     * @param  string  $location
+     * @param  bool  $deep
+     * @return DirectoryListing<StorageAttributes>
      *
      * @throws FilesystemException
-     *
-     * @return DirectoryListing<StorageAttributes>
      */
     public function listContents(string $location, bool $deep = self::LIST_SHALLOW): DirectoryListing
     {
@@ -169,12 +163,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Get the file's last modification time.
      *
-     * @param string $path
+     * @param  string  $path
+     * @return int
      *
      * @throws UnableToRetrieveMetadata
      * @throws FilesystemException
-     *
-     * @return int
      */
     public function lastModified(string $path): int
     {
@@ -191,12 +184,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Get the file's filesize.
      *
-     * @param string $path
+     * @param  string  $path
+     * @return int
      *
      * @throws UnableToRetrieveMetadata
      * @throws FilesystemException
-     *
-     * @return int
      */
     public function fileSize(string $path): int
     {
@@ -210,12 +202,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Get the mime-type of a given file.
      *
-     * @param string $path
+     * @param  string  $path
+     * @return string
      *
      * @throws UnableToRetrieveMetadata
      * @throws FilesystemException
-     *
-     * @return string
      */
     public function mimeType(string $path): string
     {
@@ -229,12 +220,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Get the visibility for the given path.
      *
-     * @param string $path
+     * @param  string  $path
+     * @return string
      *
      * @throws UnableToRetrieveMetadata
      * @throws FilesystemException
-     *
-     * @return string
      */
     public function visibility(string $path): string
     {
@@ -256,19 +246,18 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Write the contents of a file.
      *
-     * @param string $location
-     * @param string $contents
+     * @param  string  $location
+     * @param  string  $contents
      * @param  array|[]  $options
+     * @return void
      *
      * @throws UnableToWriteFile
      * @throws FilesystemException
-     *
-     * @return void
      */
     public function write(string $location, string $contents, array $config = []): void
     {
         if ($this->directoryExists($location)) {
-            if (!file_exists($contents)) {
+            if (! file_exists($contents)) {
                 throw UnableToWriteFile::atLocation($location, 'The contents must be a valid file location.');
             }
 
@@ -306,14 +295,13 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Write a new file using a stream.
      *
-     * @param string   $location The path of the new file.
-     * @param resource $contents The file handle.
-     * @param array    $config   An optional configuration array.
+     * @param  string  $location  The path of the new file.
+     * @param  resource  $contents  The file handle.
+     * @param  array  $config  An optional configuration array.
+     * @return void
      *
      * @throws UnableToWriteFile
      * @throws FilesystemException
-     *
-     * @return void
      */
     public function writeStream(string $location, $contents, array $config = []): void
     {
@@ -323,13 +311,12 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Set the visibility for a file.
      *
-     * @param string $path       The path to the file.
-     * @param string $visibility One of 'public' or 'private'.
+     * @param  string  $path  The path to the file.
+     * @param  string  $visibility  One of 'public' or 'private'.
+     * @return void
      *
      * @throws UnableToSetVisibility
      * @throws FilesystemException
-     *
-     * @return void
      */
     public function setVisibility(string $path, string $visibility): void
     {
@@ -348,12 +335,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Delete a file.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return void
      *
      * @throws UnableToDeleteFile
      * @throws FilesystemException
-     *
-     * @return void
      */
     public function delete(string $location): void
     {
@@ -370,12 +356,11 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Delete a directory.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return void
      *
      * @throws UnableToDeleteDirectory
      * @throws FilesystemException
-     *
-     * @return void
      */
     public function deleteDirectory(string $location): void
     {
@@ -389,13 +374,12 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Create a directory.
      *
-     * @param string $location The name of the new directory.
-     * @param array  $config   An optional configuration array.
+     * @param  string  $location  The name of the new directory.
+     * @param  array  $config  An optional configuration array.
+     * @return void
      *
      * @throws UnableToCreateDirectory
      * @throws FilesystemException
-     *
-     * @return void
      */
     public function createDirectory(string $location, array $config = []): void
     {
@@ -405,13 +389,12 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Move a file to a new location.
      *
-     * @param string $source
-     * @param string $destination
-     * @param array  $config
+     * @param  string  $source
+     * @param  string  $destination
+     * @param  array  $config
+     * @return void
      *
      * @throws \League\Flysystem\FilesystemException
-     *
-     * @return void
      */
     public function move(string $source, string $destination, array $config = []): void
     {
@@ -422,14 +405,13 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
     /**
      * Copy a file to a new location.
      *
-     * @param string $source
-     * @param string $destination
-     * @param array  $config
+     * @param  string  $source
+     * @param  string  $destination
+     * @param  array  $config
+     * @return void
      *
      * @throws UnableToCopyFile
      * @throws FilesystemException
-     *
-     * @return void
      */
     public function copy(string $source, string $destination, array $config = []): void
     {

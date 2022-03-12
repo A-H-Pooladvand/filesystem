@@ -2,14 +2,15 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use League\Flysystem\UnableToReadFile;
 use League\Flysystem\FilesystemException;
+use League\Flysystem\UnableToReadFile;
+use Tests\TestCase;
 
 class ReadTest extends TestCase
 {
     /**
      * @test
+     *
      * @throws \League\Flysystem\FilesystemException
      */
     public function it_has_attributes_if_queried_correctly()
@@ -22,6 +23,7 @@ class ReadTest extends TestCase
 
     /**
      * @test
+     *
      * @throws \League\Flysystem\FilesystemException
      */
     public function it_throws_exception_if_the_file_does_not_exists()

@@ -14,15 +14,14 @@ abstract class AbstractFilesystem
     /**
      * Reads the object.
      *
-     * @param string $location
+     * @param  string  $location
+     * @return \Aws\Result
      *
      * @throws \League\Flysystem\FilesystemException
-     *
-     * @return \Aws\Result
      */
     protected function readObject(string $location): Result
     {
-        if (!$this->fileExists($location)) {
+        if (! $this->fileExists($location)) {
             throw new UnableToReadFile("{$this->bucket}/$location does not exists.");
         }
 
@@ -34,8 +33,7 @@ abstract class AbstractFilesystem
     /**
      * Creates Attribute class file from array.
      *
-     * @param array $item
-     *
+     * @param  array  $item
      * @return \League\Flysystem\FileAttributes
      */
     protected function toFileAttribute(array $item): FileAttributes
@@ -52,8 +50,7 @@ abstract class AbstractFilesystem
     /**
      * Convert the object to its JSON representation.
      *
-     * @param mixed $data
-     *
+     * @param  mixed  $data
      * @return string
      */
     protected function toJson(mixed $data): string

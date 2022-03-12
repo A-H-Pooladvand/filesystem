@@ -26,9 +26,8 @@ trait ParameterTrait
     /**
      * Parameters setter.
      *
-     * @param string $key
-     * @param mixed  $value
-     *
+     * @param  string  $key
+     * @param  mixed  $value
      * @return void
      */
     protected function setParam(string $key, mixed $value)
@@ -39,8 +38,7 @@ trait ParameterTrait
     /**
      * Sets the bucket name.
      *
-     * @param string $bucket
-     *
+     * @param  string  $bucket
      * @return void
      */
     protected function setBucket(string $bucket)
@@ -51,8 +49,7 @@ trait ParameterTrait
     /**
      * Sets the max key param.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return void
      */
     protected function setMaxKeys(int $value)
@@ -63,8 +60,7 @@ trait ParameterTrait
     /**
      * Sets prefix param.
      *
-     * @param mixed $value
-     *
+     * @param  mixed  $value
      * @return void
      */
     protected function setPrefix(mixed $value)
@@ -75,8 +71,7 @@ trait ParameterTrait
     /**
      * Sets the token.
      *
-     * @param string|null $value
-     *
+     * @param  string|null  $value
      * @return void
      */
     protected function setToken(string|null $value)
@@ -91,8 +86,7 @@ trait ParameterTrait
     /**
      * Sets the key param.
      *
-     * @param mixed $value
-     *
+     * @param  mixed  $value
      * @return void
      */
     protected function setKey(mixed $value)
@@ -103,8 +97,7 @@ trait ParameterTrait
     /**
      * Sets ACL param.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return void
      */
     protected function setAcl(string $value)
