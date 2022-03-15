@@ -4,6 +4,7 @@ namespace Ahp\Filesystem;
 
 use Aws\Api\DateTimeResult;
 use Aws\S3\S3Client;
+use GuzzleHttp\Psr7\Stream;
 use League\Flysystem\DirectoryListing;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\FilesystemOperator;
@@ -114,7 +115,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemOperator
      * Get a resource to read the file.
      *
      * @param  string  $location
-     * @return resource
+     * @return resource|\GuzzleHttp\Psr7\Stream
      *
      * @throws UnableToReadFile
      * @throws FilesystemException
